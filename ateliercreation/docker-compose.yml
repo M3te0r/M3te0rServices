@@ -1,0 +1,22 @@
+version: '3'
+services:
+  wpatelier:
+    image: wordpress:6.0-apache
+    container_name: wpatelier
+    restart: always
+    networks:
+      - traefik-public
+      - web_web
+    volumes:
+      - /home/m3te0r/wp-ateliercreation:/var/www/html
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ateliercreation.rule=Host(`www.ateliercreation.net`)
+      - traefik.http.routers.ateliercreation.tls=true
+      - traefik.http.routers.ateliercreation.tls.certresolver=default
+
+networks:
+  traefik-public:
+    external: true
+  web_web:
+    external: true

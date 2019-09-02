@@ -1,0 +1,21 @@
+version: '3'
+services:
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    restart: always
+    command: -H unix:///var/run/docker.sock
+    networks:
+      - traefik-public
+    volumes:
+      - /home/m3te0r/portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portainer.rule=Host(`portainer.mete0r.fr`)
+      - traefik.http.routers.portainer.tls=true
+      - traefik.http.routers.portainer.tls.certresolver=default
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
+networks:
+  traefik-public:
+    external: true

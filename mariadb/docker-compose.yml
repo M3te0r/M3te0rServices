@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:10.8
+    container_name: mariadb
+    hostname: mariadb
+    restart: always
+    networks:
+      - web_web
+    volumes:
+      - /home/m3te0r/maria-databases:/var/lib/mysql
+      - /home/m3te0r/maria-config:/etc/mysql
+    ports:
+      - 3306:3306
+
+networks:
+  web_web:
+    external: true

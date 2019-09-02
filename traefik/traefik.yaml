@@ -1,0 +1,37 @@
+log:
+  level: INFO
+api:
+  insecure: false
+  dashboard: true
+entryPoints:
+  # dashboard:
+  #   address: :8080
+  http:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+  https:
+    address: :443
+
+providers:
+  providersThrottleDuration: 2s
+  file:
+    filename: /dynamic-conf.yml
+    watch: true
+  docker:
+    network: traefik-public
+    watch: true
+    exposedByDefault: false
+    endpoint: unix:///var/run/docker.sock
+    swarmModeRefreshSeconds: 15s
+
+certificatesResolvers:
+  default:
+    acme:
+      email: mathieu@pequin.fr
+      storage: acme.json
+      httpChallenge:
+        entryPoint: http

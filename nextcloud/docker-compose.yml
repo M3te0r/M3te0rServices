@@ -1,0 +1,28 @@
+version: '3'
+services:
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud
+    restart: always
+    networks:
+      - traefik-public
+      - web_web
+    volumes:
+      - /home/m3te0r/nextcloud-main:/var/www/html
+      - /home/m3te0r/nextcloud-data:/var/www/html/data
+      - /home/m3te0r/nextcloud-web:/var/www/html/config
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.http.routers.newtcloud.rule=Host(`cloud.mete0r.fr`)
+      - traefik.http.routers.newtcloud.tls=true
+      - traefik.http.routers.newtcloud.tls.certresolver=default
+      - "traefik.http.middlewares.newtcloud.redirectregex.regex=https://(.*)/.well-known/(card|cal)dav"
+      - "traefik.http.middlewares.newtcloud.redirectregex.replacement=https://$$1/remote.php/dav/"
+      - "traefik.http.middlewares.test-redirectregex.redirectregex.permanent=true"
+
+networks:
+  traefik-public:
+    external: true
+  web_web:
+    external: true

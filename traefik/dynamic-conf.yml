@@ -1,0 +1,18 @@
+http:
+
+  routers:
+    router-homeassistant:
+      entryPoints:
+      - http
+      - https
+      service: service-homeassistant
+      rule: "Host(`home.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+  services:
+    service-homeassistant:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.220:8123
+        passHostHeader: true

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
+    restart: always
+    networks:
+      - web_web
+
+networks:
+  web_web:
+    external: true
