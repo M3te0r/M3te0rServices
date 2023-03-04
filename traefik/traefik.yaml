@@ -1,7 +1,7 @@
 log:
-  level: INFO
+  level: DEBUG
 api:
-  insecure: false
+  insecure: true
   dashboard: true
 entryPoints:
   # dashboard:
@@ -22,6 +22,7 @@ providers:
     filename: /dynamic-conf.yml
     watch: true
   docker:
+    #swarmmode: true
     network: traefik-public
     watch: true
     exposedByDefault: false
