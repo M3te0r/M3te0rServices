@@ -7,12 +7,10 @@ services:
     networks:
       - traefik-public
     ports:
-      # # The HTTP port
       - "80:80"
       - "443:443"
       # # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
-      # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yaml:/etc/traefik/traefik.yaml
