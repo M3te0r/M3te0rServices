@@ -18,6 +18,7 @@ services:
     networks:
       - traefik-public
       - internal
+      - web_web
     volumes:
       - /home/m3te0r/nextcloud-main:/var/www/html
       - /home/m3te0r/nextcloud-data:/var/www/html/data
@@ -34,6 +35,8 @@ services:
 
 networks:
   traefik-public:
+    external: true
+  web_web:
     external: true
   internal:
     driver: bridge 
