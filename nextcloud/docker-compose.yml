@@ -13,6 +13,8 @@ services:
     image: nextcloud
     container_name: nextcloud
     restart: always
+    depends_on:
+      - redis
     networks:
       - traefik-public
       - internal
