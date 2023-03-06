@@ -1,12 +1,21 @@
 version: '3'
 services:
+
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
+    restart: always
+    networks:
+      - internal
+
   nextcloud:
     image: nextcloud
     container_name: nextcloud
     restart: always
     networks:
       - traefik-public
-      - web_web
+      - internal
     volumes:
       - /home/m3te0r/nextcloud-main:/var/www/html
       - /home/m3te0r/nextcloud-data:/var/www/html/data
@@ -24,5 +33,5 @@ services:
 networks:
   traefik-public:
     external: true
-  web_web:
-    external: true
+  internal:
+    driver: bridge 
