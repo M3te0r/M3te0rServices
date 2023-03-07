@@ -1,7 +1,7 @@
 version: '3'
 services:
   wpatelier:
-    image: wordpress:6.0-apache
+    image: wordpress:6.1-apache
     container_name: wpatelier
     restart: always
     networks:
