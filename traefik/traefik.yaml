@@ -11,7 +11,9 @@ metrics:
   influxDB:
     address: 192.168.2.25:8086
     database: traefik
-    protocol: http
+    protocol: udp
+    addServicesLabels: true
+    addEntryPointsLabels: true
 
 entryPoints:
   # dashboard:
