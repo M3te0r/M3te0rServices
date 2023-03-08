@@ -9,8 +9,9 @@ accessLog: {}
 
 metrics:
   influxDB:
-    address: "192.168.2.25:8089"
+    address: "192.168.2.25:8086"
     database: traefik
+    protocol: http
 
 entryPoints:
   # dashboard:
