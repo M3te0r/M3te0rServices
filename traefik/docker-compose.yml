@@ -19,17 +19,16 @@ services:
       - ./traefik-dashboard-users:/traefik-dashboard-users
     environment:
       - TZ=Europe/Paris
+      - TRAEFIK_METRICS_INFLUXDB=true
+      - TRAEFIK_METRICS_INFLUXDB_ADDRESS=192.168.2.25:8086
+      - TRAEFIK_METRICS_INFLUXDB_DATABASE=traefik
+      - TRAEFIK_METRICS_INFLUXDB_USERNAME=${INFLUX_USERNAME}
+      - TRAEFIK_METRICS_INFLUXDB_PASSWORD=${INFLUX_PASSWORD}
     logging:
       driver: "json-file"
       options:
         max-file: "1"
         max-size: "2048m"
-    command:
-      - --metrics.influxdb=true
-      - --metrics.influxdb.address=192.168.2.25:8086
-      - --metrics.influxdb.database=traefik
-      - --metrics.influxdb.username=${INFLUX_USERNAME}
-      - --metrics.influxdb.password=${INFLUX_PASSWORD}
 
     deploy:
       placement:
