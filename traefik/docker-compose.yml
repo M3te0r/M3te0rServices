@@ -42,8 +42,8 @@ services:
       - traefik.http.services.dashboard.loadbalancer.server.port=8080
       - traefik.metrics.influxDB.address=192.168.2.25:3000
       - traefik.metrics.influxDB.database=traefik
-      - traefik.metrics.influxDB.username=${USERNAME}
-      - traefik.metrics.influxDB.password=${PASSWORD}
+      - traefik.metrics.influxDB.username=${INFLUX_USERNAME}
+      - traefik.metrics.influxDB.password=${INFLUX_PASSWORD}
 
 networks:
   traefik-public:
