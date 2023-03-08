@@ -25,11 +25,11 @@ services:
         max-file: "1"
         max-size: "2048m"
     command:
-      - "--metrics.influxdb=true"
-      - "--metrics.influxdb.address=192.168.2.25:8086"
-      - "--metrics.influxdb.database=traefik"
-      - "--metrics.influxdb.username=$INFLUX_USERNAME"
-      - "--metrics.influxdb.password=$INFLUX_PASSWORD"
+      - --metrics.influxdb=true
+      - --metrics.influxdb.address=192.168.2.25:8086
+      - --metrics.influxdb.database=traefik
+      - --metrics.influxdb.username=${INFLUX_USERNAME}
+      - --metrics.influxdb.password=${INFLUX_PASSWORD}
 
     deploy:
       placement:
