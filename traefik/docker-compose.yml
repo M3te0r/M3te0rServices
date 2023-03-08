@@ -40,7 +40,7 @@ services:
       - traefik.http.routers.dashboard.middlewares=dashboard-auth
       - traefik.http.middlewares.dashboard-auth.basicauth.usersfile=/traefik-dashboard-users
       - traefik.http.services.dashboard.loadbalancer.server.port=8080
-      - traefik.metrics.influxDB.address=192.168.2.25:3000
+      - traefik.metrics.influxDB.address=192.168.2.25:8086
       - traefik.metrics.influxDB.database=traefik
       - traefik.metrics.influxDB.username=${INFLUX_USERNAME}
       - traefik.metrics.influxDB.password=${INFLUX_PASSWORD}
