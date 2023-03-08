@@ -9,7 +9,7 @@ accessLog: {}
 
 metrics:
   influxDB:
-    address: "192.168.2.25:8086"
+    address: "192.168.2.25:8089"
     database: traefik
 
 entryPoints:
@@ -32,7 +32,7 @@ providers:
     watch: true
   docker:
     #swarmmode: true
-    network: traefik-public
+    # network: traefik-public
     watch: true
     exposedByDefault: false
     endpoint: unix:///var/run/docker.sock
