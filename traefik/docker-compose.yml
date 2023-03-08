@@ -17,6 +17,13 @@ services:
       - ./acme.json:/acme.json
       - ./dynamic-conf.yml:/dynamic-conf.yml
       - ./traefik-dashboard-users:/traefik-dashboard-users
+    environment:
+      - TZ=Europe/Paris
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "2048m"
     deploy:
       placement:
         constraints:

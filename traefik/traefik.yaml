@@ -1,8 +1,12 @@
 log:
   level: INFO
+
 api:
   insecure: true
   dashboard: true
+
+accessLog: {}
+
 entryPoints:
   # dashboard:
   #   address: :8080
