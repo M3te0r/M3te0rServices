@@ -9,7 +9,7 @@ accessLog: {}
 
 metrics:
   influxDB:
-    address: "127.0.0.1:8086"
+    address: "192.168.2.25:8086"
     database: traefik
 
 entryPoints:
