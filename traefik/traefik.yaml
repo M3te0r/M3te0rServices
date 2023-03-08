@@ -8,12 +8,7 @@ api:
 accessLog: {}
 
 metrics:
-  influxDB:
-    address: 192.168.2.25:8086
-    database: traefik
-    protocol: udp
-    addServicesLabels: true
-    addEntryPointsLabels: true
+  prometheus: {}
 
 entryPoints:
   # dashboard:
