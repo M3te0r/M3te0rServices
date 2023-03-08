@@ -7,11 +7,6 @@ api:
 
 accessLog: {}
 
-metrics:
-  influxDB:
-    address: "192.168.2.25:3000"
-    database: traefik
-
 entryPoints:
   # dashboard:
   #   address: :8080
