@@ -14,7 +14,7 @@ services:
       - traefik.http.routers.ateliercreation.rule=Host(`www.ateliercreation.net`)
       - traefik.http.routers.ateliercreation.tls=true
       - traefik.http.routers.ateliercreation.tls.certresolver=default
-
+      - traefik.docker.network=traefik-public
 networks:
   traefik-public:
     external: true
