@@ -16,7 +16,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yaml:/etc/traefik/traefik.yaml
       - ./acme.json:/acme.json
-      - ./dynamic-conf.yml:/dynamic-conf.yml
+      - ./dynamic:/dynamic
       - ./traefik-dashboard-users:/traefik-dashboard-users
     environment:
       - TZ=Europe/Paris

@@ -1,0 +1,157 @@
+http:
+
+  routers:
+    router-homeassistant:
+      entryPoints:
+      - http
+      - https
+      service: service-homeassistant
+      rule: "Host(`home.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
+    router-plex:
+      entryPoints:
+      - http
+      - https
+      service: service-plex
+      rule: "Host(`plex.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
+    router-transmission:
+      entryPoints:
+      - http
+      - https
+      service: service-transmission
+      rule: "Host(`transmission.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
+    router-jackett:
+      entryPoints:
+      - http
+      - https
+      service: service-jackett
+      rule: "Host(`jackett.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
+    router-lidarr:
+      entryPoints:
+      - http
+      - https
+      service: service-lidarr
+      rule: "Host(`lidarr.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
+    router-radarr:
+      entryPoints:
+      - http
+      - https
+      service: service-radarr
+      rule: "Host(`radarr.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
+    router-bazarr:
+      entryPoints:
+      - http
+      - https
+      service: service-bazarr
+      rule: "Host(`bazarr.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
+    router-ombi:
+      entryPoints:
+      - http
+      - https
+      service: service-ombi
+      rule: "Host(`ombi.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
+    router-tautulli:
+      entryPoints:
+      - http
+      - https
+      service: service-tautulli
+      rule: "Host(`tautulli.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+  services:
+    service-homeassistant:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.220:8123
+        passHostHeader: true
+
+
+    service-plex:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:32400
+        passHostHeader: true
+
+
+    service-transmission:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:9091
+        passHostHeader: true
+
+
+
+    service-jackett:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:9117
+        passHostHeader: true
+
+
+
+    service-lidarr:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:8686
+        passHostHeader: true
+
+
+
+    service-radarr:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:8310
+        passHostHeader: true
+
+
+    service-bazarr:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:6767
+        passHostHeader: true
+
+    service-ombi:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:8822
+        passHostHeader: true
+
+
+    service-tautulli:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:8181
+        passHostHeader: true
+

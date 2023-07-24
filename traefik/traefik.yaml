@@ -36,7 +36,7 @@ entryPoints:
 providers:
   providersThrottleDuration: 2s
   file:
-    filename: /dynamic-conf.yml
+    directory: /dynamic
     watch: true
   docker:
     #swarmmode: true

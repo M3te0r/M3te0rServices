@@ -84,7 +84,7 @@ services:
 
 
   sonarr:
-    image: linuxserver/sonarr
+    image: linuxserver/sonarr:develop
     container_name: sonarr
     restart: ${RESTARTPOLICY}
     networks:
@@ -119,9 +119,9 @@ services:
     networks:
       - torrent_net
       - traefik-public
-    depends_on:
-      - transmission
-      - jackett
+#    depends_on:
+#      - transmission
+#      - jackett
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -149,9 +149,9 @@ services:
     networks:
       - torrent_net
       - traefik-public
-    depends_on:
-      - transmission
-      - jackett
+#    depends_on:
+#      - transmission
+#      - jackett
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -177,9 +177,9 @@ services:
      networks:
        - traefik-public
        - torrent_net
-     depends_on:
-       - transmission
-       - jackett
+#     depends_on:
+#       - transmission
+#       - jackett
      environment:
        - PUID=${PUID}
        - PGID=${PGID}
@@ -199,10 +199,10 @@ services:
     image: linuxserver/ombi
     container_name: ombi
     restart: ${RESTARTPOLICY}
-    depends_on:
-      - sonarr
-      - radarr
-      - plex
+#    depends_on:
+#      - sonarr
+#      - radarr
+#      - plex
     networks:
       - plex_net
       - torrent_net
