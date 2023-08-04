@@ -100,15 +100,6 @@ http:
       tls:
         certResolver: default
 
-    router-opnsense:
-      entryPoints:
-      - http
-      - https
-      service: service-opnsense
-      rule: "Host(`opn.mete0r.fr`)"
-      tls:
-        certResolver: default
-
   services:
     service-homeassistant:
       loadBalancer:
@@ -180,10 +171,3 @@ http:
         servers:
         - url: http://192.168.2.23:8181
         passHostHeader: true
-
-    service-opnsense:
-      loadBalancer:
-        servers:
-        - url: https://192.168.2.254:8080
-        passHostHeader: true
-
