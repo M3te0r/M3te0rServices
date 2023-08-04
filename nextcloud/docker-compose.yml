@@ -10,7 +10,7 @@ services:
       - internal
 
   nextcloud:
-    image: nextcloud
+    image: nextcloud:26
     container_name: nextcloud
     restart: always
     depends_on:
