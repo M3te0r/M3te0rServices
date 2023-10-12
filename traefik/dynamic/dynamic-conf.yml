@@ -100,6 +100,16 @@ http:
       tls:
         certResolver: default
 
+
+    router-status:
+      entryPoints:
+      - http
+      - https
+      service: service-status
+      rule: "Host(`status.mete0r.fr`)"
+      tls:
+        certResolver: default
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -170,4 +180,10 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.23:8181
+        passHostHeader: true
+
+    service-status:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.220:3001/status/m3te0r
         passHostHeader: true
