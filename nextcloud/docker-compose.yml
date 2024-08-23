@@ -1,4 +1,3 @@
-version: '3'
 services:
 
   redis:
@@ -10,7 +9,7 @@ services:
       - internal
 
   nextcloud:
-    image: nextcloud:26
+    image: nextcloud:29
     container_name: nextcloud
     restart: always
     depends_on:

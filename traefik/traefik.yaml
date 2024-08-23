@@ -1,3 +1,6 @@
+#core:
+#  defaultRuleSyntax: v2
+
 log:
   level: INFO
 
@@ -39,12 +42,9 @@ providers:
     directory: /dynamic
     watch: true
   docker:
-    #swarmmode: true
-    # network: traefik-public
     watch: true
     exposedByDefault: false
     endpoint: unix:///var/run/docker.sock
-    swarmModeRefreshSeconds: 15s
 
 certificatesResolvers:
   default:
