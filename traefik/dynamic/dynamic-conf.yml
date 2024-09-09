@@ -1,5 +1,9 @@
 http:
 
+  serversTransports:
+    mytransport:
+      insecureSkipVerify: true
+
   routers:
     router-homeassistant:
       entryPoints:
@@ -110,6 +114,18 @@ http:
       tls:
         certResolver: default
 
+
+
+    router-crafty-controller:
+      entryPoints:
+      - http
+      - https
+      service: service-crafty-controller
+      rule: "Host(`crafty.mete0r.fr`)"
+      tls:
+        certResolver: default
+
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -186,4 +202,12 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.220:3001/status/m3te0r
+        passHostHeader: true
+
+
+    service-crafty-controller:
+      loadBalancer:
+        serversTransport: mytransport
+        servers:
+        - url: https://192.168.2.23:8443/
         passHostHeader: true
