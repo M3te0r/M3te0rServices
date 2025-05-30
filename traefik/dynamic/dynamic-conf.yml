@@ -15,6 +15,9 @@ http:
           X-XSS-PROTECTION: 1
           server: ""
           x-powered-by: ""
+        accessControlAllowMethods: 'GET, OPTIONS, PUT, POST, PATCH, DELETE'
+        accessControlMaxAge: 100
+        addVaryHeader: true
         frameDeny: true
         contentTypeNosniff: true
         browserXssFilter: true
