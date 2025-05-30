@@ -44,9 +44,6 @@ http:
   routers:
 
     router-homeassistant:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -56,9 +53,6 @@ http:
         certResolver: default
 
     router-plex:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -68,9 +62,6 @@ http:
         certResolver: default
 
     router-transmission:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -80,9 +71,6 @@ http:
         certResolver: default
 
     router-jackett:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -92,9 +80,6 @@ http:
         certResolver: default
 
     router-lidarr:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -104,9 +89,6 @@ http:
         certResolver: default
 
     router-radarr:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -116,9 +98,6 @@ http:
         certResolver: default
 
     router-sonarr:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -128,9 +107,6 @@ http:
         certResolver: default
 
     router-bazarr:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -140,9 +116,6 @@ http:
         certResolver: default
 
     router-ombi:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -152,9 +125,6 @@ http:
         certResolver: default
 
     router-tautulli:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -164,9 +134,6 @@ http:
         certResolver: default
 
     router-status:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -186,8 +153,6 @@ http:
 
     router-jellyfin-controller:
       middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
         - jellyfin-mw
       entryPoints:
       - http
@@ -198,9 +163,6 @@ http:
         certResolver: default
 
     router-accounts-jellyfin-controller:
-      middlewares:
-        - redirect-tls-mw
-        - common-sec-mw
       entryPoints:
       - http
       - https
