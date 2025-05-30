@@ -37,6 +37,7 @@ entryPoints:
       middlewares:
         - redirect-tls-mw@file
         - common-sec-mw@file
+        - compress-mw@file
     http2:
       maxConcurrentStreams: 250
 
@@ -60,3 +61,9 @@ certificatesResolvers:
       storage: acme.json
       httpChallenge:
         entryPoint: http
+
+tls:
+  options:
+    default:
+      sniStrict: true
+      minVersion: VersionTLS13

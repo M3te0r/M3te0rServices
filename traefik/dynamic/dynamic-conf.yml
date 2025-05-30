@@ -1,6 +1,10 @@
 http:
 
   middlewares:
+
+    compress-mw:
+      compress: { }
+
     redirect-tls-mw:
       headers:
         SSLRedirect: true
