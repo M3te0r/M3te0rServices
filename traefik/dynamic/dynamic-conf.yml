@@ -30,7 +30,11 @@ http:
       insecureSkipVerify: true
 
   routers:
+
     router-homeassistant:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -41,6 +45,9 @@ http:
 
 
     router-plex:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -51,6 +58,9 @@ http:
 
 
     router-transmission:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -61,6 +71,9 @@ http:
 
 
     router-jackett:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -71,6 +84,9 @@ http:
 
 
     router-lidarr:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -81,6 +97,9 @@ http:
 
 
     router-radarr:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -91,6 +110,9 @@ http:
 
 
     router-sonarr:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -101,6 +123,9 @@ http:
 
 
     router-bazarr:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -111,6 +136,9 @@ http:
 
 
     router-ombi:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -121,6 +149,9 @@ http:
 
 
     router-tautulli:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -131,6 +162,9 @@ http:
 
 
     router-status:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
       entryPoints:
       - http
       - https
@@ -138,8 +172,6 @@ http:
       rule: "Host(`status.mete0r.fr`)"
       tls:
         certResolver: default
-
-
 
     router-crafty-controller:
       entryPoints:
