@@ -1,5 +1,19 @@
 http:
 
+  middlewares:
+    common-sec-mw:
+      headers:
+        customResponseHeaders:
+          X-Robots-Tag: "noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex"
+          X-XSS-PROTECTION: 1
+        frameDeny: true
+        contentTypeNosniff: true
+        customFrameOptionsValue: 'allow-from https://jellyfin.mete0r.fr'
+
+    jellyfin-mw:
+        customFrameOptionsValue: 'allow-from https://jellyfin.mete0r.fr'
+
+
   serversTransports:
     mytransport:
       insecureSkipVerify: true
@@ -126,6 +140,9 @@ http:
         certResolver: default
 
     router-jellyfin-controller:
+      middlewares:
+        - common-sec-mw
+        - jellyfin-mw
       entryPoints:
       - http
       - https
