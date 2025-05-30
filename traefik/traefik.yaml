@@ -33,6 +33,13 @@ entryPoints:
           scheme: https
   https:
     address: :443
+    http:
+      middlewares:
+        - redirect-tls-mw@file
+        - common-sec-mw@file
+    http2:
+      maxConcurrentStreams: 250
+
   metrics:
     address: :8088
 
