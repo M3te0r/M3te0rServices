@@ -1,14 +1,25 @@
 http:
 
   middlewares:
+    redirect-tls-mw:
+      headers:
+        SSLRedirect: true
+        STSSeconds: 315360000
+        STSIncludeSubdomains: true
+        STSPreload: true
+        forceSTSHeader: true
     common-sec-mw:
       headers:
         customResponseHeaders:
           X-Robots-Tag: "noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex"
           X-XSS-PROTECTION: 1
+          server: ""
+          x-powered-by: ""
         frameDeny: true
         contentTypeNosniff: true
-
+        browserXssFilter: true
+        customFrameOptionsValue: "SAMEORIGIN"
+        referrerPolicy: "same-origin"
     jellyfin-mw:
       headers:
         customFrameOptionsValue: 'allow-from https://jellyfin.mete0r.fr'
@@ -141,6 +152,7 @@ http:
 
     router-jellyfin-controller:
       middlewares:
+        - redirect-tls-mw
         - common-sec-mw
         - jellyfin-mw
       entryPoints:
