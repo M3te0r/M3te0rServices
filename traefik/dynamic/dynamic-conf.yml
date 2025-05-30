@@ -195,6 +195,17 @@ http:
       tls:
         certResolver: default
 
+    router-accounts-jellyfin-controller:
+      middlewares:
+        - redirect-tls-mw
+        - common-sec-mw
+      entryPoints:
+      - http
+      - https
+      service: service-accounts-jellyfin-controller
+      rule: "Host(`accounts.jellyfin.mete0r.fr`)"
+      tls:
+        certResolver: default
 
   services:
     service-homeassistant:
@@ -287,4 +298,10 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.23:8096/
+        passHostHeader: true
+
+    service-accounts-jellyfin-controller:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:8056/
         passHostHeader: true
