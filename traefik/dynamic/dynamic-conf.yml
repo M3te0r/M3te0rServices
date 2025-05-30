@@ -8,9 +8,9 @@ http:
           X-XSS-PROTECTION: 1
         frameDeny: true
         contentTypeNosniff: true
-        customFrameOptionsValue: 'allow-from https://jellyfin.mete0r.fr'
 
     jellyfin-mw:
+      headers:
         customFrameOptionsValue: 'allow-from https://jellyfin.mete0r.fr'
 
 
