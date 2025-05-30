@@ -1,3 +1,9 @@
+tls:
+  options:
+    default:
+      sniStrict: true
+      minVersion: VersionTLS13
+
 http:
 
   middlewares:
@@ -31,7 +37,6 @@ http:
       headers:
         customFrameOptionsValue: 'allow-from https://jellyfin.mete0r.fr'
 
-
   serversTransports:
     mytransport:
       insecureSkipVerify: true
@@ -50,7 +55,6 @@ http:
       tls:
         certResolver: default
 
-
     router-plex:
       middlewares:
         - redirect-tls-mw
@@ -62,7 +66,6 @@ http:
       rule: "Host(`plex.mete0r.fr`)"
       tls:
         certResolver: default
-
 
     router-transmission:
       middlewares:
@@ -76,7 +79,6 @@ http:
       tls:
         certResolver: default
 
-
     router-jackett:
       middlewares:
         - redirect-tls-mw
@@ -88,7 +90,6 @@ http:
       rule: "Host(`jackett.mete0r.fr`)"
       tls:
         certResolver: default
-
 
     router-lidarr:
       middlewares:
@@ -102,7 +103,6 @@ http:
       tls:
         certResolver: default
 
-
     router-radarr:
       middlewares:
         - redirect-tls-mw
@@ -114,7 +114,6 @@ http:
       rule: "Host(`radarr.mete0r.fr`)"
       tls:
         certResolver: default
-
 
     router-sonarr:
       middlewares:
@@ -128,7 +127,6 @@ http:
       tls:
         certResolver: default
 
-
     router-bazarr:
       middlewares:
         - redirect-tls-mw
@@ -140,7 +138,6 @@ http:
       rule: "Host(`bazarr.mete0r.fr`)"
       tls:
         certResolver: default
-
 
     router-ombi:
       middlewares:
@@ -154,7 +151,6 @@ http:
       tls:
         certResolver: default
 
-
     router-tautulli:
       middlewares:
         - redirect-tls-mw
@@ -166,7 +162,6 @@ http:
       rule: "Host(`tautulli.mete0r.fr`)"
       tls:
         certResolver: default
-
 
     router-status:
       middlewares:
@@ -221,13 +216,11 @@ http:
         - url: http://192.168.2.220:8123
         passHostHeader: true
 
-
     service-plex:
       loadBalancer:
         servers:
         - url: http://192.168.2.23:32400
         passHostHeader: true
-
 
     service-transmission:
       loadBalancer:
@@ -235,15 +228,11 @@ http:
         - url: http://192.168.2.23:9091
         passHostHeader: true
 
-
-
     service-jackett:
       loadBalancer:
         servers:
         - url: http://192.168.2.23:9117
         passHostHeader: true
-
-
 
     service-lidarr:
       loadBalancer:
@@ -251,21 +240,17 @@ http:
         - url: http://192.168.2.23:8686
         passHostHeader: true
 
-
-
     service-radarr:
       loadBalancer:
         servers:
         - url: http://192.168.2.23:8310
         passHostHeader: true
 
-
     service-sonarr:
       loadBalancer:
         servers:
         - url: http://192.168.2.23:8989
         passHostHeader: true
-
 
     service-bazarr:
       loadBalancer:
@@ -279,7 +264,6 @@ http:
         - url: http://192.168.2.23:8822
         passHostHeader: true
 
-
     service-tautulli:
       loadBalancer:
         servers:
@@ -292,14 +276,12 @@ http:
         - url: http://192.168.2.220:3001/status/m3te0r
         passHostHeader: true
 
-
     service-crafty-controller:
       loadBalancer:
         serversTransport: mytransport
         servers:
         - url: https://192.168.2.23:8443/
         passHostHeader: true
-
 
     service-jellyfin-controller:
       loadBalancer:

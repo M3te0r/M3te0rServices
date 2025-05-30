@@ -61,9 +61,3 @@ certificatesResolvers:
       storage: acme.json
       httpChallenge:
         entryPoint: http
-
-tls:
-  options:
-    default:
-      sniStrict: true
-      minVersion: VersionTLS13
