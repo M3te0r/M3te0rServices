@@ -39,7 +39,7 @@ entryPoints:
         - common-sec-mw@file
         - compress-mw@file
     http2:
-      maxConcurrentStreams: 250
+      maxConcurrentStreams: 500
 
   metrics:
     address: :8088
