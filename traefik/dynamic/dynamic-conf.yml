@@ -54,7 +54,7 @@ http:
       entryPoints:
       - https
       service: service-homeassistant
-      rule: "Host(`home.mete0r.fr`)"
+      rule: "Host(`home.mete0r.fr`) && !PathPrefix(`/api/websocket`)"
       tls:
         certResolver: default
 
