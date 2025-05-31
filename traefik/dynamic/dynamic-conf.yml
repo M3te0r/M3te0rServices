@@ -42,6 +42,13 @@ http:
       insecureSkipVerify: true
 
   routers:
+    router-homeassistant-ws:
+      entryPoints:
+      - https
+      service: service-homeassistant-ws
+      rule: "Host(`home.mete0r.fr`) && PathPrefix(`/api/websocket`)"
+      tls:
+        certResolver: default
 
     router-homeassistant:
       entryPoints:
@@ -172,6 +179,12 @@ http:
 
   services:
     service-homeassistant:
+      loadBalancer:
+        serversTransport: mytransport
+        servers:
+        - url: http://192.168.2.220:8123
+        passHostHeader: true
+    service-homeassistant-ws:
       loadBalancer:
         serversTransport: mytransport
         servers:
