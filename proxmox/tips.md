@@ -15,6 +15,9 @@ bash pve-mod-gui-sensors.sh install
 # Then clear the browser cache to ensure all changes are visualized.
 ```
 
+# Using clusters for migration (old to new node)
+
+https://youtu.be/E60_FC967YE?si=T12vOoHJoMGbw7Se&t=721
 
 # NFS Share to an LXC
 
