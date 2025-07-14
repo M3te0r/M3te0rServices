@@ -60,16 +60,30 @@ qm set $VMID --scsi1 $STORAGE:cloudinit
 mkdir -p /var/lib/vz/snippets
 cat << EOF | tee /var/lib/vz/snippets/ubuntu-vendor-basic.yaml
 #cloud-config
-users:
-  - name: m3te0r
+
+system_info:
+  default_user:
+    name: m3te0r
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups:
       - wheel
       - sudo
+      - docker
 chpasswd: { expire: False }
 ssh_pwauth: True
 package_update: true
 package_upgrade: true
+
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu plucky stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+# create the docker group
+groups:
+  - docker
+
 packages:
   - qemu-guest-agent
   - nano
@@ -81,13 +95,25 @@ packages:
   - apt-transport-https
   - ca-certificates
   - gnupg
+  - software-properties-common
   - lsb-release
   - unattended-upgrades
   - bashtop
   - zsh
   - fastfetch
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
 
 timezone: Europe/Paris
+
+# Enable ipv4 forwarding, required on CIS hardened machines
+write_files:
+  - path: /etc/sysctl.d/enabled_ipv4_forwarding.conf
+    content: |
+      net.ipv4.conf.all.forwarding=1
 
 runcmd:
     - cp /etc/zsh/newuser.zshrc.recommended /home/m3te0r/.zshrc
@@ -108,6 +134,6 @@ EOF
 qm set $VMID --cicustom "vendor=local:snippets/ubuntu-vendor-basic.yaml"
 qm set $VMID --tags ubuntu-template,pluck,cloudinit
 #setUSER
-qm set $VMID --ciuser $USERNAME --cipassword
+qm set $VMID --cipassword
 qm set $VMID --ipconfig0 ip=dhcp
 qm template $VMID
