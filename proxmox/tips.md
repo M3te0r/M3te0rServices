@@ -1,3 +1,21 @@
+# Proxmox VE Helper Scripts
+
+https://community-scripts.github.io/ProxmoxVE/scripts
+
+# Add hardware monitoring display (CPU, disks, fan, etc) to Proxmox node UI
+
+https://github.com/Meliox/PVE-mods
+
+```shell
+apt-get install lm-sensors
+# lm-sensors must be configured, run below to configure your sensors, apply temperature offsets. Refer to lm-sensors manual for more information.
+sensors-detect 
+wget https://raw.githubusercontent.com/Meliox/PVE-mods/main/pve-mod-gui-sensors.sh
+bash pve-mod-gui-sensors.sh install
+# Then clear the browser cache to ensure all changes are visualized.
+```
+
+
 # NFS Share to an LXC
 
 ## NAS 
