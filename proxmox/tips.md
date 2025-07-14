@@ -19,6 +19,11 @@ bash pve-mod-gui-sensors.sh install
 
 https://youtu.be/E60_FC967YE?si=T12vOoHJoMGbw7Se&t=721
 
+
+# QEMU CPU Type
+
+https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines#_qemu_cpu_types
+
 # NFS Share to an LXC
 
 ## NAS 
