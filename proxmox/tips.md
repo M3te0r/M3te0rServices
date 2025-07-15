@@ -2,6 +2,18 @@
 
 https://community-scripts.github.io/ProxmoxVE/scripts
 
+
+## First scripts to execute
+
+
+- https://community-scripts.github.io/ProxmoxVE/scripts?id=post-pve-install
+- https://community-scripts.github.io/ProxmoxVE/scripts?id=microcode
+- https://community-scripts.github.io/ProxmoxVE/scripts?id=add-iptag
+- https://community-scripts.github.io/ProxmoxVE/scripts?id=lxc-delete
+- https://community-scripts.github.io/ProxmoxVE/scripts?id=clean-orphaned-lvm
+- https://community-scripts.github.io/ProxmoxVE/scripts?id=kernel-clean
+- https://community-scripts.github.io/ProxmoxVE/scripts?id=fstrim
+
 # Add hardware monitoring display (CPU, disks, fan, etc) to Proxmox node UI
 
 https://github.com/Meliox/PVE-mods
