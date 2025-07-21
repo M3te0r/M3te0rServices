@@ -28,9 +28,16 @@ services:
       - traefik.http.routers.newtcloud.rule=Host(`cloud.mete0r.fr`)
       - traefik.http.routers.newtcloud.tls=true
       - traefik.http.routers.newtcloud.tls.certresolver=default
-#      - "traefik.http.middlewares.newtcloud.redirectregex.regex=https://(.*)/.well-known/(card|cal)dav"
-#      - "traefik.http.middlewares.newtcloud.redirectregex.replacement=https://$$1/remote.php/dav/"
-#      - "traefik.http.middlewares.test-redirectregex.redirectregex.permanent=true"
+      # Middleware for HTTP headers (includes all required headers)
+      - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.X-Content-Type-Options=nosniff
+      - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.X-XSS-Protection=1; mode=block
+      - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.X-Robots-Tag=noindex,nofollow
+      - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.X-Frame-Options=SAMEORIGIN
+      - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.Referrer-Policy=no-referrer
+      - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.Strict-Transport-Security=max-age=15552000; includeSubDomains; preload
+      - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.Permissions-Policy=camera=(), microphone=(), geolocation=()
+      - traefik.http.middlewares.nextcloud_headers.headers.customRequestHeaders.X-Forwarded-Proto=https
+      - traefik.http.middlewares.nextcloud_headers.headers.customRequestHeaders.X-Forwarded-Host=nextcloud.example.com
       - "traefik.http.routers.newtcloud.middlewares=nextcloud_redirectregex@docker"
       - "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.permanent=true"
       - "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex=https://(.*)/.well-known/(?:card|cal)dav"
