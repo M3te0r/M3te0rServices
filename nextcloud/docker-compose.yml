@@ -28,6 +28,7 @@ services:
       - traefik.http.routers.newtcloud.rule=Host(`cloud.mete0r.fr`)
       - traefik.http.routers.newtcloud.tls=true
       - traefik.http.routers.newtcloud.tls.certresolver=default
+      - "traefik.http.routers.newtcloud.entrypoints=https"
       # Middleware for HTTP headers (includes all required headers)
       - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.X-Content-Type-Options=nosniff
       - traefik.http.middlewares.nextcloud_headers.headers.customResponseHeaders.X-XSS-Protection=1; mode=block
