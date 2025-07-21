@@ -28,10 +28,13 @@ services:
       - traefik.http.routers.newtcloud.rule=Host(`cloud.mete0r.fr`)
       - traefik.http.routers.newtcloud.tls=true
       - traefik.http.routers.newtcloud.tls.certresolver=default
-      - "traefik.http.middlewares.newtcloud.redirectregex.regex=https://(.*)/.well-known/(card|cal)dav"
-      - "traefik.http.middlewares.newtcloud.redirectregex.replacement=https://$$1/remote.php/dav/"
-      - "traefik.http.middlewares.test-redirectregex.redirectregex.permanent=true"
-
+#      - "traefik.http.middlewares.newtcloud.redirectregex.regex=https://(.*)/.well-known/(card|cal)dav"
+#      - "traefik.http.middlewares.newtcloud.redirectregex.replacement=https://$$1/remote.php/dav/"
+#      - "traefik.http.middlewares.test-redirectregex.redirectregex.permanent=true"
+      - "traefik.http.routers.newtcloud.middlewares=nextcloud_redirectregex@docker"
+      - "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.permanent=true"
+      - "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex=https://(.*)/.well-known/(?:card|cal)dav"
+      - "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement=https://$${1}/remote.php/dav"
 networks:
   traefik-public:
     external: true
