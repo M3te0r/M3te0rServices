@@ -1,7 +1,7 @@
 #! /bin/bash
 
 VMID=9299
-STORAGE=local-lvm
+STORAGE=local
 IMAGE_URL=https://cloud-images.ubuntu.com/plucky/current/plucky-server-cloudimg-amd64.img
 USERNAME=m3te0r
 IMAGE_NAME=pluck-server-cloudimg-amd64.img
@@ -50,7 +50,7 @@ qm create $VMID --name "ubuntu-plucky-template" --ostype l26 \
     --memory 2048 --balloon 0 \
     --agent 1,fstrim_cloned_disks=1 \
     --bios ovmf --machine q35 --efidisk0 $STORAGE:0,pre-enrolled-keys=0 \
-    --cpu x86-64-v2-AES --socket 1 --cores 2 \
+    --cpu host --socket 1 --cores 2 \
     --vga serial0 --serial0 socket  \
     --net0 virtio,bridge=vmbr0
 qm importdisk $VMID $IMAGE_NAME $STORAGE
