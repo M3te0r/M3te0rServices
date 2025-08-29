@@ -1,7 +1,7 @@
 #! /bin/bash
 
 VMID=9299
-STORAGE=local
+STORAGE=pve_main_storage
 IMAGE_URL=https://cloud-images.ubuntu.com/plucky/current/plucky-server-cloudimg-amd64.img
 USERNAME=m3te0r
 IMAGE_NAME=pluck-server-cloudimg-amd64.img
