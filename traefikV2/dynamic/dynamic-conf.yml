@@ -203,7 +203,7 @@ http:
     service-plex:
       loadBalancer:
         servers:
-        - url: http://192.168.2.23:32400
+        - url: http://192.168.2.87:32400
         passHostHeader: true
 
     service-transmission:
