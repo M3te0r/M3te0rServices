@@ -283,5 +283,5 @@ http:
     service-ateliercreation:
       loadBalancer:
         servers:
-        - url: http://192.168.2.40:8030/
+        - url: https://192.168.2.40:8030/
         passHostHeader: true
