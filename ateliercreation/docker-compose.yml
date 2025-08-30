@@ -4,7 +4,7 @@ services:
     container_name: wpatelier
     restart: always
     ports:
-      - "8030:80"
+      - 8080:80
     networks:
       - traefik-public
       - web_web
