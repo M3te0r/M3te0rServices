@@ -248,7 +248,7 @@ http:
     service-status:
       loadBalancer:
         servers:
-        - url: http://192.168.2.220:3001/status/m3te0r
+        - url: http://192.168.2.154:3001/status/m3te0r
         passHostHeader: true
 
     service-crafty-controller:
@@ -261,7 +261,7 @@ http:
     service-jellyfin-controller:
       loadBalancer:
         servers:
-        - url: http://192.168.2.23:8096/
+        - url: http://192.168.2.108:8096/ for
         passHostHeader: true
 
     service-accounts-jellyfin-controller:
