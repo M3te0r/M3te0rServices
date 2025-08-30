@@ -3,6 +3,8 @@ services:
     image: wordpress:6.6-apache
     container_name: wpatelier
     restart: always
+    ports:
+      - "8030:80"
     networks:
       - traefik-public
       - web_web

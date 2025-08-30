@@ -177,6 +177,15 @@ http:
       tls:
         certResolver: default
 
+    router-ateliercreation:
+      entryPoints:
+        - http
+        - https
+      service: service-ateliercreation
+      rule: "Host(`www.ateliercreation.net`) || Host(`ateliercreation.net`)"
+      tls:
+        certResolver: default
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -268,4 +277,11 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.23:8056/
+        passHostHeader: true
+
+
+    service-ateliercreation:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.40:8030/
         passHostHeader: true
