@@ -67,14 +67,14 @@ http:
       tls:
         certResolver: default
 
-    router-transmission:
-      entryPoints:
-      - http
-      - https
-      service: service-transmission
-      rule: "Host(`transmission.mete0r.fr`)"
-      tls:
-        certResolver: default
+#    router-transmission:
+#      entryPoints:
+#      - http
+#      - https
+#      service: service-transmission
+#      rule: "Host(`transmission.mete0r.fr`)"
+#      tls:
+#        certResolver: default
 
     router-jackett:
       entryPoints:
@@ -197,11 +197,11 @@ http:
         - url: http://192.168.2.87:32400
         passHostHeader: true
 
-    service-transmission:
-      loadBalancer:
-        servers:
-        - url: http://192.168.2.23:9091
-        passHostHeader: true
+#    service-transmission:
+#      loadBalancer:
+#        servers:
+#        - url: http://192.168.2.23:9091
+#        passHostHeader: true
 
     service-jackett:
       loadBalancer:

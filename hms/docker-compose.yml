@@ -4,298 +4,58 @@ services:
   transmission:
     image: haugene/transmission-openvpn
     container_name: transmission
-    restart: ${RESTARTPOLICY}
+    restart: unless-stopped
     networks:
-      - torrent_net
       - traefik-public
     cap_add:
       - NET_ADMIN
     ports:
       - 9091:9091
-    devices:
-      - /dev/net/tun
-    volumes:
-      - ${DATAFOLDER}/transmission:/data
-      - ${MOUNTFOLDER}/transmission/incomplete:/incomplete
-      - ${MOUNTFOLDER}/transmission/completed:/completed
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+#    volumes:
+#      - ${DATAFOLDER}/transmission:/data
+#      - ${MOUNTFOLDER}/transmission/incomplete:/incomplete
+#      - ${MOUNTFOLDER}/transmission/completed:/completed
     environment:
-      - UFW_ALLOW_GW_NET=false
-     #- OPENVPN_CONFIG=nl-01.protonvpn.com.udp 
-      - OPENVPN_CONFIG=nl.protonvpn.net.udp
-     #- OPENVPN_CONFIG=ch-05.protonvpn.com.udp
-      - OPENVPN_PROVIDER=${VPNPROVIDER}
+#      - UFW_ALLOW_GW_NET=false
+      - OPENVPN_CONFIG=nl.protonvpn.udp
+      - OPENVPN_PROVIDER=PROTONVPN
       - OPENVPN_USERNAME=${VPNUSER}
       - OPENVPN_PASSWORD=${VPNPASS}
-      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
+#      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
 #      - TRANSMISSION_CACHE_SIZE_MB=32
-      - TRANSMISSION_WEB_UI=transmission-web-control # OPTIONAL - just a different UI
-      - TRANSMISSION_PREFETCH_ENABLED=false
-      - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
-      - TRANSMISSION_DOWNLOAD_QUEUE_SIZE=100
-      - TRANSMISSION_MAX_PEERS_GLOBAL=3000
-      - TRANSMISSION_PEER_LIMIT_GLOBAL=3000
-      - TRANSMISSION_PEER_LIMIT_PER_TORRENT=300
-      - TRANSMISSION_DOWNLOAD_DIR=/completed
-      - TRANSMISSION_INCOMPLETE_DIR=/incomplete
-      - TRANSMISSION_RATIO_LIMIT=${RATIO_LIMIT}
-      - TRANSMISSION_RATIO_LIMIT_ENABLED=${RATIO_ENABLED}
-      - HEALTH_CHECK_HOST=google.com
-      - TRANSMISSION_RPC_USERNAME=${TRANSMISSION_RPC_USERNAME}
-      - TRANSMISSION_RPC_PASSWORD=${TRANSMISSION_RPC_PASSWORD}
-      - TZ=${TZ}
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TRANSMISSION_RPC_WHITELIST_ENABLED=false
-      - WEBPROXY_ENABLED=false
-      - WEBPROXY_PORT=8888
-      - LOCAL_NETWORK=192.168.2.0/24
+#      - TRANSMISSION_WEB_UI=transmission-web-control # OPTIONAL - just a different UI
+#      - TRANSMISSION_PREFETCH_ENABLED=false
+#      - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
+#      - TRANSMISSION_DOWNLOAD_QUEUE_SIZE=100
+#      - TRANSMISSION_MAX_PEERS_GLOBAL=3000
+#      - TRANSMISSION_PEER_LIMIT_GLOBAL=3000
+#      - TRANSMISSION_PEER_LIMIT_PER_TORRENT=300
+#      - TRANSMISSION_DOWNLOAD_DIR=/completed
+#      - TRANSMISSION_INCOMPLETE_DIR=/incomplete
+#      - TRANSMISSION_RATIO_LIMIT=${RATIO_LIMIT}
+#      - TRANSMISSION_RATIO_LIMIT_ENABLED=${RATIO_ENABLED}
+#      - HEALTH_CHECK_HOST=google.com
+#      - TRANSMISSION_RPC_USERNAME=${TRANSMISSION_RPC_USERNAME}
+#      - TRANSMISSION_RPC_PASSWORD=${TRANSMISSION_RPC_PASSWORD}
+#      - TZ=${TZ}
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - TRANSMISSION_RPC_WHITELIST_ENABLED=false
+#      - WEBPROXY_ENABLED=false
+#      - WEBPROXY_PORT=8888
+#      - LOCAL_NETWORK=192.168.2.0/24
     labels:
       - traefik.http.services.transmission.loadbalancer.server.port=9091
       - traefik.enable=true
       - traefik.docker.network=traefik-public
-      - traefik.http.routers.transmission.rule=Host(`transmission.${LOCALDOMAIN}`)
+      - traefik.http.routers.transmission.rule=Host(`transmission.mete0r.fr`)
       - traefik.http.routers.transmission.tls=true
       - traefik.http.routers.transmission.tls.certresolver=default
 
-  jackett:
-    image: linuxserver/jackett
-    container_name: jackett
-    restart: ${RESTARTPOLICY}
-    depends_on:
-      - transmission
-    networks:
-      - torrent_net
-      - traefik-public
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      # folder where config will be stored
-      - ${DATAFOLDER}/jackett/config:/config
-      # not entirely sure what this folder does, I think it's for torrents you decide to download through Jackett, but you have Sonarr and Radarr for that
-      - ${MOUNTFOLDER}/jackett/blackhole:/downloads
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik-public
-      - traefik.http.routers.jackett.rule=Host(`jackett.${LOCALDOMAIN}`)
-      - traefik.http.routers.jackett.tls=true
-      - traefik.http.routers.jackett.tls.certresolver=default
-
-
-  sonarr:
-    image: linuxserver/sonarr:develop
-    container_name: sonarr
-    restart: ${RESTARTPOLICY}
-    networks:
-      - torrent_net
-      - traefik-public
-    depends_on:
-      - transmission
-      - jackett
-    environment:
-      - TZ=${TZ}
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - UMASK_SET=022
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik-public
-      - traefik.http.routers.sonarr.rule=Host(`sonarr.${LOCALDOMAIN}`)
-      - traefik.http.routers.sonarr.tls=true
-      - traefik.http.routers.sonarr.tls.certresolver=default
-    volumes:
-      # folder where config will be stored
-      - ${DATAFOLDER}/sonarr/config:/config
-      # plex series folder location
-      - ${MOUNTFOLDER}/MEDIA/tv:/tv
-      # completed downloads location
-      - ${MOUNTFOLDER}/transmission/completed:/completed
-
-  radarr:
-    image: linuxserver/radarr
-    container_name: radarr
-    restart: ${RESTARTPOLICY}
-    networks:
-      - torrent_net
-      - traefik-public
-#    depends_on:
-#      - transmission
-#      - jackett
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - UMASK_SET=022
-      - TZ=${TZ}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik-public
-      - traefik.http.routers.radarr.rule=Host(`radarr.${LOCALDOMAIN}`)
-      - traefik.http.routers.radarr.tls=true
-      - traefik.http.routers.radarr.tls.certresolver=default
-    volumes:
-      # folder where config will be stored
-      - ${DATAFOLDER}/radarr/config:/config
-      # plex movie folder location
-      - ${MOUNTFOLDER}/MEDIA/movies:/movies
-      # completed downloads location
-      - ${MOUNTFOLDER}/transmission/completed:/completed
-
-
-  bazarr:
-    image: linuxserver/bazarr
-    container_name: bazarr
-    restart: ${RESTARTPOLICY}
-    networks:
-      - torrent_net
-      - traefik-public
-#    depends_on:
-#      - transmission
-#      - jackett
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - UMASK_SET=022
-      - TZ=${TZ}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik-public
-      - traefik.http.routers.bazarr.rule=Host(`bazarr.${LOCALDOMAIN}`)
-      - traefik.http.routers.bazarr.tls=true
-      - traefik.http.routers.bazarr.tls.certresolver=default
-    volumes:
-      # folder where config will be stored
-      - ${DATAFOLDER}/bazarr/config:/config
-      # plex movie folder location
-      - ${MOUNTFOLDER}/MEDIA/movies:/movies
-      - ${MOUNTFOLDER}/MEDIA/tv:/tv
-
-
-  lidarr:
-     image: linuxserver/lidarr
-     container_name: lidarr
-     networks:
-       - traefik-public
-       - torrent_net
-#     depends_on:
-#       - transmission
-#       - jackett
-     environment:
-       - PUID=${PUID}
-       - PGID=${PGID}
-       - UMASK_SET=022
-       - TZ=${TZ}
-     labels:
-       - traefik.enable=true
-       - traefik.docker.network=traefik-public
-       - traefik.http.routers.lidarr.rule=Host(`lidarr.${LOCALDOMAIN}`)
-       - traefik.http.routers.lidarr.tls=true
-       - traefik.http.routers.lidarr.tls.certresolver=default
-     volumes:
-       - ${DATAFOLDER}/lidarr/config:/config
-       - ${MOUNTFOLDER}/MEDIA/music:/music
-       - ${MOUNTFOLDER}/transmission/completed:/completed
-  ombi:
-    image: linuxserver/ombi
-    container_name: ombi
-    restart: ${RESTARTPOLICY}
-#    depends_on:
-#      - sonarr
-#      - radarr
-#      - plex
-    networks:
-      - plex_net
-      - torrent_net
-      - traefik-public
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    labels:
-       - traefik.enable=true
-       - traefik.docker.network=traefik-public
-       - traefik.http.routers.ombi.rule=Host(`ombi.${LOCALDOMAIN}`)
-       - traefik.http.routers.ombi.tls=true
-       - traefik.http.routers.ombi.tls.certresolver=default
-    volumes:
-      # folder where config will be stored
-      - ${DATAFOLDER}/ombi/config:/config
-
-  plex:
-    image: linuxserver/plex
-    container_name: plex
-    restart: ${RESTARTPOLICY}
-#    networks:
-#      - plex_net
-#      - traefik-public
-    network_mode: host
-    ports:
-      - 32400:32400/tcp
-      - 3005:3005/tcp
-      - 8324:8324/tcp
-      - 32469:32469/tcp
-      - 1900:1900/udp
-      - 32410:32410/udp
-      - 32412:32412/udp
-      - 32413:32413/udp
-      - 32414:32414/udp
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      #- UMASK=022
-      - VERSION=docker
-      - PLEX_CLAIM=${PLEX_CLAIM}
-      - ADVERTISE_IP=https://${HOSTIP}:443
-#      - ALLOWED_NETWORKS=${HOSTSUBNET}
-    hostname: plex-docker
-    volumes:
-      # folder where config will be stored
-      - ${DATAFOLDER}/plex/config:/config
-      # temp folder for Plex transcoding
-      #- ${DATAFOLDER}/plex/temp:/transcode
-      # media folder where all movies and series are stored
-      - ${MOUNTFOLDER}/MEDIA:/data
-    privileged: true
-    labels:
-       - traefik.http.services.plex.loadbalancer.server.port=32400
-       - traefik.enable=true
-       - traefik.docker.network=traefik-public
-       - traefik.http.routers.plex.rule=Host(`plex.${LOCALDOMAIN}`)
-       - traefik.http.routers.plex.tls=true
-       - traefik.http.routers.plex.tls.certresolver=default
-
-  tautulli:
-    image: linuxserver/tautulli
-    container_name: tautulli
-    restart: ${RESTARTPOLICY}
-    depends_on:
-      - plex
-    networks:
-      - plex_net
-      - traefik-public
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik-public
-      - traefik.http.routers.tautulli.rule=Host(`tautulli.${LOCALDOMAIN}`)
-      - traefik.http.routers.tautulli.tls=true
-      - traefik.http.routers.tautulli.tls.certresolver=default
-    volumes:
-      # folder where config will be stored
-      - ${DATAFOLDER}/tautulli/config:/config
-      # Plex logs location
-      - ${DATAFOLDER}/plex/config/Library/Application Support/Plex Media Server/Logs:/logs:ro
-
-
-
 networks:
-  torrent_net:
-    driver: bridge
-  plex_net:
-    driver: bridge
   traefik-public:
-    external: true
+    name: traefik-public
