@@ -1,8 +1,6 @@
-
-version: '3'
 services:
   transmission:
-    image: haugene/transmission-openvpn
+    image: haugene/transmission-openvpn:latest
     container_name: transmission
     restart: unless-stopped
     networks:
@@ -25,22 +23,12 @@ services:
       - OPENVPN_PASSWORD=${VPNPASS}
       - TZ=Europe/Paris
       - LOCAL_NETWORK=192.168.2.0/24
+      - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
+      - TRANSMISSION_RPC_USERNAME=${TRANSMISSION_RPC_USERNAME}
+      - TRANSMISSION_RPC_PASSWORD=${TRANSMISSION_RPC_PASSWORD}
 #      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
-#      - TRANSMISSION_CACHE_SIZE_MB=32
 #      - TRANSMISSION_WEB_UI=transmission-web-control # OPTIONAL - just a different UI
 #      - TRANSMISSION_PREFETCH_ENABLED=false
-#      - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
-#      - TRANSMISSION_DOWNLOAD_QUEUE_SIZE=100
-#      - TRANSMISSION_MAX_PEERS_GLOBAL=3000
-#      - TRANSMISSION_PEER_LIMIT_GLOBAL=3000
-#      - TRANSMISSION_PEER_LIMIT_PER_TORRENT=300
-#      - TRANSMISSION_DOWNLOAD_DIR=/completed
-#      - TRANSMISSION_INCOMPLETE_DIR=/incomplete
-#      - TRANSMISSION_RATIO_LIMIT=${RATIO_LIMIT}
-#      - TRANSMISSION_RATIO_LIMIT_ENABLED=${RATIO_ENABLED}
-#      - HEALTH_CHECK_HOST=google.com
-#      - TRANSMISSION_RPC_USERNAME=${TRANSMISSION_RPC_USERNAME}
-#      - TRANSMISSION_RPC_PASSWORD=${TRANSMISSION_RPC_PASSWORD}
 #      - PUID=${PUID}
 #      - PGID=${PGID}
 #      - TRANSMISSION_RPC_WHITELIST_ENABLED=false
