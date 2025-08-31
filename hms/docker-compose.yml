@@ -52,4 +52,4 @@ volumes:
     driver_opts:
       type: nfs
       o: addr=192.168.2.23,vers=4.1,nconnect=4,sec=sys,sync,rsize=131072,wsize=131072,soft,noatime,retrans=2,rw
-      device: :/volume4/Medias-HMS/transmission
+      device: :/volume4/Medias-HMS/transmission/data
