@@ -85,14 +85,14 @@ http:
       tls:
         certResolver: default
 
-#    router-radarr:
-#      entryPoints:
-#      - http
-#      - https
-#      service: service-radarr
-#      rule: "Host(`radarr.mete0r.fr`)"
-#      tls:
-#        certResolver: default
+    router-radarr:
+      entryPoints:
+      - http
+      - https
+      service: service-radarr
+      rule: "Host(`radarr.mete0r.fr`)"
+      tls:
+        certResolver: default
 
     router-sonarr:
       entryPoints:
@@ -200,11 +200,11 @@ http:
         - url: http://192.168.2.23:8686
         passHostHeader: true
 
-#    service-radarr:
-#      loadBalancer:
-#        servers:
-#        - url: http://192.168.2.23:8310
-#        passHostHeader: true
+    service-radarr:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.85:7878
+        passHostHeader: true
 
     service-sonarr:
       loadBalancer:
