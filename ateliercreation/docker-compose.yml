@@ -1,10 +1,24 @@
 services:
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: mariadb
+    hostname: mariadb
+    restart: always
+    environment:
+      - MARIADB_AUTO_UPGRADE=1
+    networks:
+      - web_web
+    volumes:
+      - /home/m3te0r/maria-databases:/var/lib/mysql
+      - /home/m3te0r/maria-config:/etc/mysql
+    ports:
+      - 3306:3306
+
   wpatelier:
     image: wordpress:6.6-apache
     container_name: wpatelier
     restart: always
-    ports:
-      - 80:80
     networks:
       - traefik-public
       - web_web
@@ -12,12 +26,11 @@ services:
       - /home/m3te0r/wp-ateliercreation:/var/www/html
     labels:
       - traefik.enable=true
-      - traefik.http.routers.ateliercreation.rule=Host(`www.ateliercreation.net`)
+      - traefik.http.routers.ateliercreation.rule=Host(`www.ateliercreation.net`)  || Host(`ateliercreation.net`)
       - traefik.http.routers.ateliercreation.tls=true
       - traefik.http.routers.ateliercreation.tls.certresolver=default
       - traefik.docker.network=traefik-public
+
 networks:
   traefik-public:
-    external: true
   web_web:
-    external: true
