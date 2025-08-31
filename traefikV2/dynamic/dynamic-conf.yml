@@ -103,14 +103,14 @@ http:
       tls:
         certResolver: default
 
-#    router-bazarr:
-#      entryPoints:
-#      - http
-#      - https
-#      service: service-bazarr
-#      rule: "Host(`bazarr.mete0r.fr`)"
-#      tls:
-#        certResolver: default
+    router-bazarr:
+      entryPoints:
+      - http
+      - https
+      service: service-bazarr
+      rule: "Host(`bazarr.mete0r.fr`)"
+      tls:
+        certResolver: default
 
     router-ombi:
       entryPoints:
@@ -212,11 +212,11 @@ http:
         - url: http://192.168.2.23:8989
         passHostHeader: true
 
-#    service-bazarr:
-#      loadBalancer:
-#        servers:
-#        - url: http://192.168.2.23:6767
-#        passHostHeader: true
+    service-bazarr:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.65:6767
+        passHostHeader: true
 
     service-ombi:
       loadBalancer:
