@@ -16,7 +16,7 @@ services:
       - 3306:3306
 
   wpatelier:
-    image: wordpress:6.6-apache
+    image: wordpress:6.8-apache
     container_name: wpatelier
     restart: always
     depends_on:
