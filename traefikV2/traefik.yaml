@@ -34,12 +34,18 @@ entryPoints:
   https:
     address: :443
     http:
+      tls:
+        certResolver: default
+        domains:
+          - main: "mete0r.fr"
+            sans:
+              - "*.mete0r.fr"
       middlewares:
         - redirect-tls-mw@file
         - common-sec-mw@file
         - compress-mw@file
     http2:
-      maxConcurrentStreams: 500
+      maxConcurrentStreams: 1000
 
   metrics:
     address: :8088
