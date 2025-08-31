@@ -94,14 +94,14 @@ http:
       tls:
         certResolver: default
 
-#    router-sonarr:
-#      entryPoints:
-#      - http
-#      - https
-#      service: service-sonarr
-#      rule: "Host(`sonarr.mete0r.fr`)"
-#      tls:
-#        certResolver: default
+    router-sonarr:
+      entryPoints:
+      - http
+      - https
+      service: service-sonarr
+      rule: "Host(`sonarr.mete0r.fr`)"
+      tls:
+        certResolver: default
 
     router-bazarr:
       entryPoints:
@@ -206,11 +206,11 @@ http:
         - url: http://192.168.2.85:7878
         passHostHeader: true
 
-#    service-sonarr:
-#      loadBalancer:
-#        servers:
-#        - url: http://192.168.2.23:8989
-#        passHostHeader: true
+    service-sonarr:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.45:8989
+        passHostHeader: true
 
     service-bazarr:
       loadBalancer:
