@@ -67,14 +67,14 @@ http:
       tls:
         certResolver: default
 
-    router-jackett:
-      entryPoints:
-      - http
-      - https
-      service: service-jackett
-      rule: "Host(`jackett.mete0r.fr`)"
-      tls:
-        certResolver: default
+#    router-jackett:
+#      entryPoints:
+#      - http
+#      - https
+#      service: service-jackett
+#      rule: "Host(`jackett.mete0r.fr`)"
+#      tls:
+#        certResolver: default
 
     router-lidarr:
       entryPoints:
@@ -188,11 +188,11 @@ http:
         - url: http://192.168.2.87:32400
         passHostHeader: true
 
-    service-jackett:
-      loadBalancer:
-        servers:
-        - url: http://192.168.2.23:9117
-        passHostHeader: true
+#    service-jackett:
+#      loadBalancer:
+#        servers:
+#        - url: http://192.168.2.23:9117
+#        passHostHeader: true
 
     service-lidarr:
       loadBalancer:
