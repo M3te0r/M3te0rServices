@@ -19,6 +19,8 @@ services:
     image: wordpress:6.6-apache
     container_name: wpatelier
     restart: always
+    depends_on:
+      - mariadb
     networks:
       - traefik-public
       - web_web
