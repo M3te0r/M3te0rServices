@@ -35,4 +35,5 @@ services:
 
 networks:
   traefik-public:
+    name: traefik-public
   web_web:
