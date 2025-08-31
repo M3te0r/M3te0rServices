@@ -29,8 +29,8 @@ services:
 #      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
 #      - TRANSMISSION_WEB_UI=transmission-web-control # OPTIONAL - just a different UI
 #      - TRANSMISSION_PREFETCH_ENABLED=false
-#      - PUID=${PUID}
-#      - PGID=${PGID}
+      - PUID=1026
+      - PGID=100
 #      - TRANSMISSION_RPC_WHITELIST_ENABLED=false
 #      - WEBPROXY_ENABLED=false
 #      - WEBPROXY_PORT=8888
@@ -51,5 +51,5 @@ volumes:
   nfs-transmission:
     driver_opts:
       type: nfs
-      o: addr=192.168.2.23,vers=4,nconnect=4,sec=sys,sync,rsize=131072,wsize=131072,nouser,soft,noatime,auto,rw,dev,exec
+      o: addr=192.168.2.23,vers=4,sec=sys,sync,rsize=131072,wsize=131072,nouser,soft,noatime,auto,rw,dev,exec
       device: :/volume4/Medias-HMS/transmission
