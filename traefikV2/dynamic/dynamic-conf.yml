@@ -76,14 +76,14 @@ http:
       tls:
         certResolver: default
 
-    router-lidarr:
-      entryPoints:
-      - http
-      - https
-      service: service-lidarr
-      rule: "Host(`lidarr.mete0r.fr`)"
-      tls:
-        certResolver: default
+#    router-lidarr:
+#      entryPoints:
+#      - http
+#      - https
+#      service: service-lidarr
+#      rule: "Host(`lidarr.mete0r.fr`)"
+#      tls:
+#        certResolver: default
 
     router-radarr:
       entryPoints:
@@ -194,11 +194,11 @@ http:
         - url: http://192.168.2.110:9117
         passHostHeader: true
 
-    service-lidarr:
-      loadBalancer:
-        servers:
-        - url: http://192.168.2.23:8686
-        passHostHeader: true
+#    service-lidarr:
+#      loadBalancer:
+#        servers:
+#        - url: http://192.168.2.23:8686
+#        passHostHeader: true
 
     service-radarr:
       loadBalancer:
