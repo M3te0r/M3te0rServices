@@ -246,11 +246,11 @@ http:
     service-jellyfin-controller:
       loadBalancer:
         servers:
-        - url: http://192.168.2.108:8096/ for
+        - url: http://192.168.2.108:8096/
         passHostHeader: true
 
     service-accounts-jellyfin-controller:
       loadBalancer:
         servers:
-        - url: http://192.168.2.23:8056/
+        - url: http://192.168.2.239:5690/
         passHostHeader: true
