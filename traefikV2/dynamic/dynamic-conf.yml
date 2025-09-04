@@ -168,6 +168,15 @@ http:
       tls:
         certResolver: default
 
+    router-nextcloud:
+      entryPoints:
+      - http
+      - https
+      service: service-nextcloud
+      rule: "Host(`cloud.mete0r.fr`)"
+      tls:
+        certResolver: default
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -253,4 +262,11 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.239:5690/
+        passHostHeader: true
+
+
+    service-nextcloud:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.23:8080/
         passHostHeader: true
