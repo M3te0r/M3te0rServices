@@ -164,7 +164,7 @@ http:
       - http
       - https
       service: service-accounts-jellyfin-controller
-      rule: "Host(`accounts.jellyfin.mete0r.fr`)"
+      rule: "Host(`accounts-jellyfin.mete0r.fr`)"
       tls:
         certResolver: default
 
