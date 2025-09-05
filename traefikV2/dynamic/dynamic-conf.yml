@@ -15,6 +15,12 @@ http:
       buffering:
         maxRequestBodyBytes: 32212254720
 
+    nextcloud-mx:
+      - redirectRegex:
+          regex: "https://(.*)/.well-known/(?:card|cal)dav"
+          permanent: true
+          replacement: "https://$${1}/remote.php/dav"
+
     redirect-tls-mw:
       headers:
         SSLRedirect: true
@@ -173,6 +179,8 @@ http:
         certResolver: default
 
     router-nextcloud:
+      middlewares:
+        - nextcloud-mx
       entryPoints:
       - http
       - https
