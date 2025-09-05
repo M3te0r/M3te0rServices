@@ -297,5 +297,5 @@ http:
     service-wizarr:
       loadBalancer:
         servers:
-        - url: https://192.168.2.239:5690/
+        - url: http://192.168.2.239:5690/
         passHostHeader: true
