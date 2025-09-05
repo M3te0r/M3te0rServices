@@ -177,6 +177,16 @@ http:
       tls:
         certResolver: default
 
+
+    router-opencloud:
+      entryPoints:
+      - http
+      - https
+      service: service-opencloud
+      rule: "Host(`cloud1.mete0r.fr`)"
+      tls:
+        certResolver: default
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -269,4 +279,11 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.40:8080/
+        passHostHeader: true
+
+
+    service-opencloud:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.6:9200/
         passHostHeader: true
