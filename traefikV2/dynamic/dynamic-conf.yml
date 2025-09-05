@@ -304,7 +304,7 @@ http:
     service-nextcloud:
       loadBalancer:
         servers:
-        - url: https://192.168.2.117/
+        - url: http://192.168.2.117/
         passHostHeader: true
 
 
