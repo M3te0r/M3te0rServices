@@ -189,37 +189,14 @@ http:
       tls:
         certResolver: default
 
-
-    router-opencloud:
-      middlewares:
-        - opencloud-limit
+    router-wizarr:
       entryPoints:
       - http
       - https
-      service: service-opencloud
-      rule: "Host(`cloud1.mete0r.fr`)"
+      service: service-wizarr
+      rule: "Host(`wizarr.mete0r.fr`)"
       tls:
         certResolver: default
-
-    router-opencloud-wopi:
-      entryPoints:
-      - http
-      - https
-      service: service-opencloud-wopi
-      rule: "Host(`wopi-cloud.mete0r.fr`)"
-      tls:
-        certResolver: default
-
-
-    router-opencloud-collabora:
-      entryPoints:
-      - http
-      - https
-      service: service-opencloud-collabora
-      rule: "Host(`collabora-cloud.mete0r.fr`)"
-      tls:
-        certResolver: default
-
 
   services:
     service-homeassistant:
@@ -317,22 +294,8 @@ http:
         passHostHeader: true
 
 
-    service-opencloud:
+    service-wizarr:
       loadBalancer:
         servers:
-        - url: http://192.168.2.6:9200/
-        passHostHeader: true
-
-
-    service-opencloud-wopi:
-      loadBalancer:
-        servers:
-        - url: http://192.168.2.6:9300/
-        passHostHeader: true
-
-
-    service-opencloud-collabora:
-      loadBalancer:
-        servers:
-        - url: http://192.168.2.6:9980/
+        - url: https://192.168.2.239:5690/
         passHostHeader: true
