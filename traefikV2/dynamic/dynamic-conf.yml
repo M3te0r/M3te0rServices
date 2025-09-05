@@ -11,6 +11,10 @@ http:
     compress-mw:
       compress: { }
 
+    opencloud-limit:
+      buffering:
+        maxRequestBodyBytes: 32212254720
+
     redirect-tls-mw:
       headers:
         SSLRedirect: true
@@ -179,6 +183,8 @@ http:
 
 
     router-opencloud:
+      middlewares:
+        - opencloud-limit
       entryPoints:
       - http
       - https
