@@ -4,6 +4,8 @@ services:
     image: crowdsecurity/crowdsec:latest
     container_name: crowdsec
     environment:
+      GID: "${GID-1002}"
+      UID: "${UID-1000}"
       COLLECTIONS: "crowdsecurity/linux crowdsecurity/traefik"
     volumes:
       - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
