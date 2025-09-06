@@ -1,10 +1,49 @@
 services:
+
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    environment:
+      GID: "${GID-1000}"
+      COLLECTIONS: "crowdsecurity/linux crowdsecurity/traefik"
+    volumes:
+      - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - ./crowdsec/db:/var/lib/crowdsec/data/
+      - ./crowdsec/config:/etc/crowdsec/
+      - ./logs:/var/log/traefik/:ro
+    networks:
+      - traefik-public
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+
+  bouncer-traefik:
+    image: docker.io/fbonalair/traefik-crowdsec-bouncer:latest
+    container_name: bouncer-traefik
+    environment:
+      CROWDSEC_BOUNCER_API_KEY: ${CROWDSEC_BOUNCER_API_KEY}
+      CROWDSEC_AGENT_HOST: crowdsec:8080
+    networks:
+      - traefik-public
+    depends_on:
+      - crowdsec
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+
   traefik-reverse:
     image: traefik:latest
     container_name: traefik
-    restart: always
+    restart: unless-stopped
+    depends_on:
+      - crowdsec
+      - bouncer-traefik
     networks:
       - traefik-public
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "80:80"
       - "443:443"
@@ -18,6 +57,7 @@ services:
       - ./acme.json:/acme.json
       - ./dynamic:/dynamic
       - ./traefik-dashboard-users:/traefik-dashboard-users
+      - ./logs:/var/log/traefik
     environment:
       - TZ=Europe/Paris
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}

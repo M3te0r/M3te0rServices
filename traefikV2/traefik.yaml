@@ -2,13 +2,14 @@
 #  defaultRuleSyntax: v2
 
 log:
-  level: INFO
+  level: "INFO"
+  filePath: "/var/log/traefik/traefik.log"
+accessLog:
+  filePath: "/var/log/traefik/access.log"
 
 api:
   insecure: true
   dashboard: true
-
-accessLog: {}
 
 metrics:
   prometheus:
@@ -27,6 +28,8 @@ entryPoints:
   http:
     address: :80
     http:
+#      middlewares:
+#        - crowdsec-bouncer@file
       redirections:
         entryPoint:
           to: https
@@ -41,6 +44,7 @@ entryPoints:
             sans:
               - "*.mete0r.fr"
       middlewares:
+#        - crowdsec-bouncer@file
         - redirect-tls-mw@file
         - common-sec-mw@file
         - compress-mw@file

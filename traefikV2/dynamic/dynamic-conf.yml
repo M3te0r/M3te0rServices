@@ -15,6 +15,11 @@ http:
       buffering:
         maxRequestBodyBytes: 32212254720
 
+    crowdsec-bouncer:
+      forwardauth:
+        address: http://bouncer-traefik:8080/api/v1/forwardAuth
+        trustForwardHeader: true
+
     nextcloud-mx:
       redirectRegex:
         regex: "https://(.*)/.well-known/(?:card|cal)dav"
