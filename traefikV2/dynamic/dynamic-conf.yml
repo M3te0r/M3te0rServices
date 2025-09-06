@@ -183,8 +183,8 @@ http:
       entryPoints:
       - http
       - https
-      service: service-jellyseer
-      rule: "Host(`jellyseer.mete0r.fr`)"
+      service: service-jellyseerr
+      rule: "Host(`jellyseerr.mete0r.fr`)"
       tls:
         certResolver: default
 
@@ -311,7 +311,7 @@ http:
         passHostHeader: true
 
 
-    service-jellyseer:
+    service-jellyseerr:
       loadBalancer:
         servers:
         - url: http://192.168.2.95:5055/
