@@ -28,8 +28,8 @@ entryPoints:
   http:
     address: :80
     http:
-#      middlewares:
-#        - crowdsec-bouncer@file
+      middlewares:
+        - crowdsec-bouncer@file
       redirections:
         entryPoint:
           to: https
@@ -44,7 +44,7 @@ entryPoints:
             sans:
               - "*.mete0r.fr"
       middlewares:
-#        - crowdsec-bouncer@file
+        - crowdsec-bouncer@file
         - redirect-tls-mw@file
         - common-sec-mw@file
         - compress-mw@file
