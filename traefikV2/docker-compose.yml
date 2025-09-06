@@ -8,10 +8,10 @@ services:
       UID: 1000
       COLLECTIONS: "crowdsecurity/linux crowdsecurity/traefik"
     volumes:
-      - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
-      - ./crowdsec/db:/var/lib/crowdsec/data/
-      - ./crowdsec/config:/etc/crowdsec/
-      - ./logs:/var/log/traefik/:ro
+      - /home/m3te0r/M3te0rServices/traefikV2/crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - /home/m3te0r/M3te0rServices/traefikV2/crowdsec/db:/var/lib/crowdsec/data/
+      - /home/m3te0r/M3te0rServices/traefikV2/crowdsec/config:/etc/crowdsec/
+      - /home/m3te0r/M3te0rServices/traefikV2/logs:/var/log/traefik/:ro
     networks:
       - traefik-public
     security_opt:
