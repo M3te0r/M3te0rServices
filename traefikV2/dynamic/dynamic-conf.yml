@@ -280,7 +280,7 @@ http:
       loadBalancer:
         serversTransport: mytransport
         servers:
-        - url: https://192.168.2.23:8443/
+        - url: https://192.168.2.199:8443/
         passHostHeader: true
 
     service-jellyfin-controller:
