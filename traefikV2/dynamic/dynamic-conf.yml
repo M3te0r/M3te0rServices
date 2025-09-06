@@ -178,6 +178,16 @@ http:
       tls:
         certResolver: default
 
+
+    router-jellyseerr:
+      entryPoints:
+      - http
+      - https
+      service: service-jellyseer
+      rule: "Host(`jellyseer.mete0r.fr`)"
+      tls:
+        certResolver: default
+
     router-nextcloud:
       middlewares:
         - nextcloud-mx
@@ -298,4 +308,11 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.239:5690/
+        passHostHeader: true
+
+
+    service-jellyseer:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.95:5055/
         passHostHeader: true
