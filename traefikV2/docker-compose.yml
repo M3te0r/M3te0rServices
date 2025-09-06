@@ -6,7 +6,7 @@ services:
     environment:
       - GID=1002
       - UID=1000
-      - COLLECTIONS="crowdsecurity/linux crowdsecurity/traefik"
+      - COLLECTIONS=crowdsecurity/linux crowdsecurity/traefik
     volumes:
       - /home/m3te0r/M3te0rServices/traefikV2/crowdsec/acquis/:/etc/crowdsec/
       - /home/m3te0r/M3te0rServices/traefikV2/crowdsec/db:/var/lib/crowdsec/data/
