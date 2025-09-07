@@ -213,6 +213,18 @@ http:
       tls:
         certResolver: default
 
+
+    router-metube:
+      middlewares:
+        - dashboard-auth
+      entryPoints:
+      - http
+      - https
+      service: service-metube
+      rule: "Host(`yt-dl.mete0r.fr`)"
+      tls:
+        certResolver: default
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -320,4 +332,10 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.95:5055/
+        passHostHeader: true
+
+    service-metube:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.194:8081
         passHostHeader: true
