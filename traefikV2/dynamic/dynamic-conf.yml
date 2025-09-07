@@ -11,6 +11,11 @@ http:
     compress-mw:
       compress: { }
 
+    basic-auth:
+      basicAuth:
+        usersfile: "/traefik-dashboard-users"
+
+
     opencloud-limit:
       buffering:
         maxRequestBodyBytes: 32212254720
@@ -216,7 +221,7 @@ http:
 
     router-metube:
       middlewares:
-        - dashboard-auth
+        - basic-auth
       entryPoints:
       - http
       - https
@@ -336,7 +341,6 @@ http:
 
     service-metube:
       loadBalancer:
-        serversTransport: mytransport
         servers:
-        - url: http://192.168.2.194:8081
+        - url: http://192.168.2.194:8081/
         passHostHeader: true
