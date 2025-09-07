@@ -230,6 +230,16 @@ http:
       tls:
         certResolver: default
 
+
+    router-it-tools:
+      entryPoints:
+      - http
+      - https
+      service: service-it-tools
+      rule: "Host(`it-tools.mete0r.fr`)"
+      tls:
+        certResolver: default
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -343,4 +353,10 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.194:8081/
+        passHostHeader: true
+
+    service-it-tools:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.177
         passHostHeader: true
