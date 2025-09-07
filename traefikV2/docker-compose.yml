@@ -3,6 +3,8 @@ services:
   crowdsec:
     image: crowdsecurity/crowdsec:latest
     container_name: crowdsec
+    depends_on:
+      - traefik-reverse
     environment:
       - GID=1002
       - UID=1000
@@ -38,9 +40,6 @@ services:
     image: traefik:latest
     container_name: traefik
     restart: unless-stopped
-    depends_on:
-      - crowdsec
-      - bouncer-traefik
     networks:
       - traefik-public
     security_opt:
