@@ -59,6 +59,7 @@ services:
     volumes:
       - /var/log:/var/log
       - ./logs:/var/log/traefik
+      - ./promtail:/etc/promtail
 
   traefik-reverse:
     image: traefik:latest
