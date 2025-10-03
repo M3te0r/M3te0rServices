@@ -12,15 +12,15 @@ api:
   dashboard: true
 
 metrics:
-  prometheus:
-    entryPoint: metrics
-    buckets:
-      - 0.1
-      - 0.3
-      - 1.2
-      - 5.0
+  influxDB2:
+    address: http://192.168.2.46:8086
+    token: '`{{ env "INFLUXDB_TOKEN" }}`'
+    org: M3te0r
+    bucket: traefik
     addEntryPointsLabels: true
+    addRoutersLabels: true
     addServicesLabels: true
+    pushInterval: 10s
 
 entryPoints:
   # dashboard:

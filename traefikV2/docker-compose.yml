@@ -61,6 +61,7 @@ services:
     environment:
       - TZ=Europe/Paris
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
     logging:
       driver: "json-file"
       options:
