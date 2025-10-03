@@ -10,16 +10,15 @@ services:
       - UID=1000
       - COLLECTIONS=crowdsecurity/linux crowdsecurity/traefik crowdsecurity/appsec-generic-rules crowdsecurity/appsec-wordpress crowdsecurity/home-assistant crowdsecurity/http-cve crowdsecurity/http-dos crowdsecurity/wordpress
     volumes:
-      - /home/m3te0r/M3te0rServices/traefikV2/crowdsec/acquis.yaml/:/etc/crowdsec/acquis.yaml
-      - /home/m3te0r/M3te0rServices/traefikV2/crowdsec/db:/var/lib/crowdsec/data/
-      - /home/m3te0r/M3te0rServices/traefikV2/crowdsec/config:/etc/crowdsec/
-      - /home/m3te0r/M3te0rServices/traefikV2/logs:/var/log/traefik/:ro
+      - /home/m3te0r/M3te0rServices/traefik/crowdsec/acquis.yaml/:/etc/crowdsec/acquis.yaml
+      - /home/m3te0r/M3te0rServices/traefik/crowdsec/db:/var/lib/crowdsec/data/
+      - /home/m3te0r/M3te0rServices/traefik/crowdsec/config:/etc/crowdsec/
+      - /home/m3te0r/M3te0rServices/traefik/logs:/var/log/traefik/:ro
     networks:
       - traefik-public
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
 
   bouncer-traefik:
     image: docker.io/fbonalair/traefik-crowdsec-bouncer:latest
@@ -35,6 +34,31 @@ services:
     security_opt:
       - no-new-privileges:true
 
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    user: 1000:1000
+    command: -config.file=/etc/loki/loki-config.yml
+    restart: unless-stopped
+    expose:
+      - 3100
+    ports:
+      - "127.0.0.1:3100:3100"
+    volumes:
+      - ./loki:/etc/loki # config
+
+  promtail:
+    image: grafana/promtail:latest
+    container_name: promtail
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail-config.yml
+    expose:
+      - 9080
+    depends_on:
+      - loki
+    volumes:
+      - /var/log:/var/log
+      - ./logs:/var/log/traefik
 
   traefik-reverse:
     image: traefik:latest
