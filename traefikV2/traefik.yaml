@@ -11,6 +11,17 @@ api:
   insecure: true
   dashboard: true
 
+metrics:
+  influxDB2:
+    address: http://192.168.2.46:8086
+    token: ZAL6j16obNWJ6h2OxxWYsYreEFPkGOUcX2hjs4i8_R_RdOd8ktQnyFflmXIVY5yLVqVmCT3ZZbDpZaXMd5146A==
+    org: M3te0r
+    bucket: traefik
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+    pushInterval: 10s
+
 entryPoints:
   # dashboard:
   #   address: :8080
