@@ -85,9 +85,9 @@ services:
       - traefik.http.middlewares.dashboard-auth.basicauth.usersfile=/traefik-dashboard-users
       - traefik.http.services.dashboard.loadbalancer.server.port=8080
     command:
-      - --metrics.influxdb2=true"
-      - --metrics.influxdb2.address=http://192.168.2.46:8086"
-      - --metrics.influxdb2.token=${INFLUXDB_TOKEN}"
+      - --metrics.influxdb2=true
+      - --metrics.influxdb2.address=http://192.168.2.46:8086
+      - --metrics.influxdb2.token=${INFLUXDB_TOKEN}
       - --metrics.influxdb2.org=M3te0r
       - --metrics.influxdb2.bucket=traefik
       - --metrics.influxdb2.addEntryPointsLabels=true
