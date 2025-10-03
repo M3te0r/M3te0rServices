@@ -33,6 +33,18 @@ metrics:
     addRoutersLabels: true
     addServicesLabels: true
     pushInterval: 10s
+  prometheus:
+    entryPoint: metrics
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+    headerLabels:
+      useragent: User-Agent
 
 entryPoints:
   # dashboard:
