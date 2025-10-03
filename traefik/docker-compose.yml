@@ -54,6 +54,8 @@ services:
     command: -config.file=/etc/promtail/promtail-config.yml
     expose:
       - 9080
+    ports:
+      - "9080:9080"
     depends_on:
       - loki
     volumes:
