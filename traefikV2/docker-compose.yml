@@ -84,15 +84,16 @@ services:
       - traefik.http.routers.dashboard.middlewares=dashboard-auth
       - traefik.http.middlewares.dashboard-auth.basicauth.usersfile=/traefik-dashboard-users
       - traefik.http.services.dashboard.loadbalancer.server.port=8080
-      - traefik.metrics.influxdb2=true
-      - traefik.metrics.influxdb2.address=http://192.168.2.46:8086
-      - traefik.metrics.influxdb2.token=${INFLUXDB_TOKEN}
-      - traefik.metrics.influxdb2.org=M3te0r
-      - traefik.metrics.influxdb2.bucket=traefik
-      - traefik.metrics.influxdb2.addEntryPointsLabels=true
-      - traefik.metrics.influxdb2.addrouterslabels=true
-      - traefik.metrics.influxdb2.addServicesLabels=true
-      - traefik.metrics.influxdb2.pushInterval=10s
+    command:
+      - --metrics.influxdb2=true"
+      - --metrics.influxdb2.address=http://192.168.2.46:8086"
+      - --metrics.influxdb2.token=${INFLUXDB_TOKEN}"
+      - --metrics.influxdb2.org=M3te0r
+      - --metrics.influxdb2.bucket=traefik
+      - --metrics.influxdb2.addEntryPointsLabels=true
+      - --metrics.influxdb2.addrouterslabels=true
+      - --metrics.influxdb2.addServicesLabels=true
+      - --metrics.influxdb2.pushInterval=10s
 
 networks:
   traefik-public:
