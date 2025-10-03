@@ -6,6 +6,18 @@ log:
   filePath: "/var/log/traefik/traefik.log"
 accessLog:
   filePath: "/var/log/traefik/access.log"
+  format: json
+#  filters:
+#    statusCodes:
+#      #- "200"
+#      - "400-599"
+  # collect logs as in-memory buffer before writing into log file
+  bufferingSize: 0
+  fields:
+    headers:
+      defaultMode: drop # drop all headers per default
+      names:
+          User-Agent: keep # log user agent strings
 
 api:
   insecure: true
