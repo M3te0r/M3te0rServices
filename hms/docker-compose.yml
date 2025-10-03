@@ -31,6 +31,7 @@ services:
 #      - TRANSMISSION_PREFETCH_ENABLED=false
       - PUID=1026
       - PGID=100
+      - GLOBAL_APPLY_PERMISSIONS=false
 #      - TRANSMISSION_RPC_WHITELIST_ENABLED=false
 #      - WEBPROXY_ENABLED=false
 #      - WEBPROXY_PORT=8888
