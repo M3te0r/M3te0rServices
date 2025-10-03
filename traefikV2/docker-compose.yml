@@ -90,7 +90,7 @@ services:
       - traefik.metrics.influxdb2.org=M3te0r
       - traefik.metrics.influxdb2.bucket=traefik
       - traefik.metrics.influxdb2.addEntryPointsLabels=true
-      - traefik.metrics.influxdb2.addRoutersLabels=true
+      - traefik.metrics.influxdb2.addrouterslabels=true
       - traefik.metrics.influxdb2.addServicesLabels=true
       - traefik.metrics.influxdb2.pushInterval=10s
 
