@@ -240,6 +240,15 @@ http:
       tls:
         certResolver: default
 
+    router-immich:
+      entryPoints:
+      - http
+      - https
+      service: service-immich
+      rule: "Host(`immich.mete0r.fr`)"
+      tls:
+        certResolver: default
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -359,4 +368,10 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.177
+        passHostHeader: true
+
+    service-immich:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.185
         passHostHeader: true
