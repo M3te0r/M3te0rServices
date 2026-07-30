@@ -249,6 +249,15 @@ http:
       tls:
         certResolver: default
 
+    router-proxmox:
+      entryPoints:
+      - http
+      - https
+      service: service-proxmox
+      rule: "Host(`proxmox.mete0r.fr`)"
+      tls:
+        certResolver: default
+
   services:
     service-homeassistant:
       loadBalancer:
@@ -374,4 +383,10 @@ http:
       loadBalancer:
         servers:
         - url: http://192.168.2.185:2283
+        passHostHeader: true
+
+    service-proxmox:
+      loadBalancer:
+        servers:
+        - url: http://192.168.2.231:8006
         passHostHeader: true
